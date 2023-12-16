@@ -52,7 +52,7 @@ export class CadastroComponent implements OnInit {
       email: [this.item.email, [Validators.required, Validators.email]],
       password: [this.item.senha, [Validators.required]],
       tipo: [this.item.tipo, [Validators.required]],
-      responsavel: [this.item.responsavel]
+      responsavel: [null]
     });
   }
 
@@ -86,9 +86,10 @@ export class CadastroComponent implements OnInit {
   }
 
   updateValidators(tipo){
-    if(tipo == TipoUsuario.PACIENTE){
+    if(tipo == TipoUsuario.PACIENTE.value){
       this.meuFormulario.get('responsavel').setValidators(Validators.required)
     }else{
+      this.meuFormulario.get('responsavel').reset();
       this.meuFormulario.get('responsavel').clearValidators();
     }
   }

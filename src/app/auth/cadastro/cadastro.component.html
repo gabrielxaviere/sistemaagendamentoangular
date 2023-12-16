@@ -34,7 +34,7 @@
 
             <mat-form-field>
                 <mat-label>Tipo de usuário</mat-label>
-                <mat-select formControlName="tipo" (change)="updateValidators(meuFormulario.get('tipo').value)">
+                <mat-select formControlName="tipo" (selectionChange)="updateValidators(meuFormulario.get('tipo').value)">
                     <mat-option *ngFor="let opcao of tipoUsuario" [value]="opcao.id">
                         {{ opcao.nome }}
                     </mat-option>

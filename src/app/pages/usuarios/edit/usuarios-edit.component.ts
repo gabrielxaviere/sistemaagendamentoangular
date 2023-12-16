@@ -134,4 +134,14 @@ export class UsuariosEditComponent {
   fecharModal(): void {
     this.dialogRef.close();
   }
+
+  updateValidators(tipo){
+    console.log(tipo);
+    if(tipo == TipoUsuario.PROFISSIONAL_SAUDE.value){
+      this.meuFormulario.get('idEspecialidade').setValidators(Validators.required)
+    }else{
+      this.meuFormulario.get('idEspecialidade').reset();
+      this.meuFormulario.get('idEspecialidade').clearValidators();  
+    }
+  }
 }
