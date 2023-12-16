@@ -19,19 +19,17 @@
       <div class="example-container">
         <mat-form-field>
           <mat-label>Pesquise pelo nome</mat-label>
-          <input [(ngModel)]="filterName" matInput #input maxlength="25" (ngModelChange)="getAll()" placeholder="Ex. Nome">
+          <input [(ngModel)]="filterName" matInput #input maxlength="25" (ngModelChange)="getAll()"
+            placeholder="Ex. Nome">
         </mat-form-field>
-        
+
         <mat-form-field>
-          <input matInput
-                 placeholder="Escolha a data"
-                 [(ngModel)]="filterData"
-                 (ngModelChange)="getAll()"
-                 [matDatepicker]="picker">
+          <input matInput placeholder="Escolha a data" [(ngModel)]="filterData" (ngModelChange)="getAll()"
+            [matDatepicker]="picker">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-        
+
         <mat-form-field>
           <mat-label>Status</mat-label>
           <mat-select [(ngModel)]="filterStatus" (ngModelChange)="getAll()">
@@ -42,7 +40,7 @@
         </mat-form-field>
 
         <button style="margin-left: 10px;" mat-raised-button (click)="clearFilters()">Limpar Filtros</button>
-        
+
       </div>
 
       <table mat-table [dataSource]="listaUsuarios">
@@ -70,7 +68,8 @@
         <ng-container matColumnDef="acoes">
           <th mat-header-cell *matHeaderCellDef> Ações </th>
           <td mat-cell *matCellDef="let element" [ngClass]="getStatusRowClass(element.status,element.data)">
-            <a *ngIf="mostrarCancelar(element.status, element.data)" style="color: rgb(255, 0, 0);cursor: pointer;" (click)="cancel(element.id)">
+            <a *ngIf="mostrarCancelar(element.status, element.data)" style="color: rgb(255, 0, 0);cursor: pointer;"
+              (click)="cancel(element.id)">
               <mat-icon>close</mat-icon>
             </a>
           </td>
@@ -78,6 +77,12 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow style="text-align: center;">
+          <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+            Nenhuma consulta cadastrada.
+          </td>
+        </tr>
       </table>
 
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">

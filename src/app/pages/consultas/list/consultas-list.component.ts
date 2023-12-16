@@ -57,6 +57,8 @@ export class ConsultasListComponent implements AfterViewInit {
     this.service.getAll(this.filterName, this.filterData, this.filterStatus, storedUser.responsavel, idUsuario).subscribe(res => {
       this.listaUsuarios = new MatTableDataSource<Consultas>(res);
       this.listaUsuarios.paginator = this.paginator;
+      console.log(this.listaUsuarios);
+      console.log(this.listaUsuarios.data.length);
     }, err => {
       console.error('Erro ao fechar o dialog:', err);
       this.messageService.openErrorSnackBar('Ocorreu um erro ao processar a operação.');
