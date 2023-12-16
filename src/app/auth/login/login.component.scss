@@ -1,0 +1,23 @@
+mat-card {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 10%;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  mat-form-field {
+    margin-bottom: 20px;
+  }
+  
+  button {
+    align-self: flex-end;
+  }
+  
+  .signup-link {
+    margin-top: 20px;
+  }
+  

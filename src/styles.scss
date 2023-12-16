@@ -1,0 +1,28 @@
+body {
+    margin: 0px;
+}
+
+.fundo {
+    background: linear-gradient(to right, #3498db, #2c3e50)
+}
+
+.mat-dialog-container {
+    padding: 0 !important;
+    border-radius: 8px !important;
+}
+
+.success-snackbar {
+    background-color: #4CAF50;
+    /* Verde para sucesso */
+}
+
+.error-snackbar {
+    background-color: #f44336;
+    /* Vermelho para erro */
+}
+
+.warning-snackbar {
+    background-color: #ff9800;
+    /* Laranja para aviso */
+}
+

@@ -1,0 +1,65 @@
+<div class="modal">
+    <div class="modal-header">
+        <span>Cadastrar/Editar usuários</span>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="modal-body ">
+        <div class="example-container mat-form-field-wrapper">
+            <form *ngIf="meuFormulario" style="display: grid;" [formGroup]="meuFormulario" (ngSubmit)="onSubmit()">
+                <mat-form-field>
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="nome">
+                    <mat-error *ngIf="meuFormulario.get('nome').hasError('required')">Nome é
+                        obrigatório.</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Sobrenome</mat-label>
+                    <input matInput formControlName="sobrenome">
+                    <mat-error *ngIf="meuFormulario.get('sobrenome').hasError('required')">Sobrenome é
+                        obrigatório.</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>E-mail</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error *ngIf="meuFormulario.get('email').hasError('required')">E-mail é obrigatório.</mat-error>
+                    <mat-error *ngIf="meuFormulario.get('email').hasError('email')">E-mail inválido.</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Senha</mat-label>
+                    <input matInput [type]="'password'" formControlName="password">
+                    <mat-error *ngIf="meuFormulario.get('password').hasError('required')">Senha é
+                        obrigatório.</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Tipo de usuário</mat-label>
+                    <mat-select formControlName="tipo">
+                        <mat-option *ngFor="let opcao of tipoUsuario" [value]="opcao.id">
+                            {{ opcao.nome }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field *ngIf="meuFormulario.get('tipo').value == 1">
+                    <mat-label>Especialidade</mat-label>
+                    <mat-select formControlName="idEspecialidade" >
+                        <mat-option *ngFor="let opcao of especialidades" [value]="opcao.id">
+                            {{ opcao.descricao }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" type="submit"
+                    [disabled]="meuFormulario.invalid">Salvar</button>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <mat-divider></mat-divider>
+
+        <button mat-button color="warn" (click)="fecharModal()">Fechar</button>
+    </div>
+</div>

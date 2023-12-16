@@ -1,0 +1,36 @@
+<div class="modal">
+    <div class="modal-header">
+        <span>Constultas</span>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="modal-body ">
+        <div class="example-container">
+            <form *ngIf="meuFormulario" [formGroup]="meuFormulario" (ngSubmit)="onSubmit()">
+                <mat-form-field>
+                    <mat-label>Especialidade</mat-label>
+                    <mat-select formControlName="especialidadeProfissional" (selectionChange)="getEspecialistas()">
+                        <mat-option *ngFor="let opcao of especialidades" [value]="opcao.id">
+                            {{ opcao.descricao }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field *ngIf="meuFormulario.get('especialidadeProfissional').value > 0">
+                    <mat-label>Profissional</mat-label>
+                    <mat-select formControlName="idProfissional">
+                        <mat-option *ngFor="let opcao of profissionais" [value]="opcao.id">
+                            {{ opcao.nome }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <app-datetime [disabledDates]="disabledDates" (datetimeSelected)="onDatetimeSelected($event)"></app-datetime>
+                <br />
+                <button mat-raised-button color="primary" type="submit"
+                    >Salvar</button>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <mat-divider></mat-divider>
+        <button mat-button color="warn" (click)="fecharModal()">Fechar</button>
+    </div>
+</div>

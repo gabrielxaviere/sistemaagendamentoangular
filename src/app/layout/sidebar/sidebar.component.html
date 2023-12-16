@@ -1,0 +1,30 @@
+<mat-toolbar class="mat-elevation-z8">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+        <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+    </button>
+    Sistema de agendamento de consultas    
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">   
+        <button *ngIf="viewConsultas" mat-button class="menu-button" >
+            <mat-icon>receipt</mat-icon>
+            <span routerLink="/apps/consultas">Consultas</span>
+        </button>
+        <button *ngIf="viewUsuarios" mat-button class="menu-button" >
+            <mat-icon>person</mat-icon>
+            <span routerLink="/apps/usuarios">Usuários</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-button class="menu-button">
+            <mat-icon>exit_to_app</mat-icon>
+            <span (click)="sair()">Sair</span>
+        </button>        
+    </mat-sidenav>
+    <mat-sidenav-content style="background-color: #f1f2f7;">
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

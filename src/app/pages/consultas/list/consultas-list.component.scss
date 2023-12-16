@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.example-container mat-form-field+mat-form-field {
+    margin-left: 8px;
+}
+
+
+.agendado-row {
+    background-color:#f0f0f7;
+}
+
+.cancelada-row {
+    background-color: #fcd6d6;
+}
+
+.concluida-row {
+    background-color: #e5fcd6;
+}
+
+.mat-row:hover {
+    background-color: #e0e0e0;
+}
