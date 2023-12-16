@@ -48,7 +48,14 @@
         <ng-container matColumnDef="idPaciente">
           <th mat-header-cell *matHeaderCellDef> Usuario </th>
           <td mat-cell *matCellDef="let element" [ngClass]="getStatusRowClass(element.status,element.data)">
-            {{element.usuarios.nome + " " + element.usuarios.sobrenome }} </td>
+            {{element.pacienteNome }} </td>
+        </ng-container>
+
+        <!-- Medico colum -->
+        <ng-container matColumnDef="ProfissionalNome">
+          <th mat-header-cell *matHeaderCellDef> Profissional da saúde </th>
+          <td mat-cell *matCellDef="let element" [ngClass]="getStatusRowClass(element.status,element.data)">
+            {{element.profissionalNome }} </td>
         </ng-container>
 
         <!-- Name Column -->

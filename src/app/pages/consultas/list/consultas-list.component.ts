@@ -12,6 +12,7 @@ import { ConsultasService } from 'src/app/core/service/consultas.service';
 import { Consultas } from 'src/app/core/models/consulta';
 import { CancelConfirmationComponent } from 'src/app/shared/components/cancel/cancel-confirmation.component';
 import { TipoUsuario } from 'src/app/core/models/enumtipousuario';
+import { ConsultaList } from 'src/app/core/list/ConsultaList';
 
 @Component({
   selector: 'app-consultas',
@@ -19,7 +20,7 @@ import { TipoUsuario } from 'src/app/core/models/enumtipousuario';
   styleUrls: ['./consultas-list.component.scss']
 })
 export class ConsultasListComponent implements AfterViewInit {
-  listaUsuarios: MatTableDataSource<Consultas>;
+  listaUsuarios: MatTableDataSource<ConsultaList>;
   breadscrums = [
     {
       title: 'Sistema de agendamento de consultas',
@@ -29,7 +30,7 @@ export class ConsultasListComponent implements AfterViewInit {
   ];
   myForm: FormGroup;
   register: UntypedFormGroup;
-  displayedColumns: string[] = ['idPaciente', 'data', 'status', 'acoes'];
+  displayedColumns: string[] = ['idPaciente', 'ProfissionalNome', 'data', 'status', 'acoes'];
   filterName: string = "";
   filterData: Date = null;
   filterStatus: number = null;
@@ -54,11 +55,11 @@ export class ConsultasListComponent implements AfterViewInit {
       idUsuario = storedUser.id;
     }
 
-    this.service.getAll(this.filterName, this.filterData, this.filterStatus, storedUser.responsavel, idUsuario).subscribe(res => {
-      this.listaUsuarios = new MatTableDataSource<Consultas>(res);
+    this.service.getWithMedicos(this.filterName, this.filterData, this.filterStatus, storedUser.responsavel, idUsuario).subscribe(res => {
+      this.listaUsuarios = new MatTableDataSource<ConsultaList>(res);
       this.listaUsuarios.paginator = this.paginator;
       console.log(this.listaUsuarios);
-      console.log(this.listaUsuarios.data.length);
+      console.log(this.listaUsuarios.data);
     }, err => {
       console.error('Erro ao fechar o dialog:', err);
       this.messageService.openErrorSnackBar('Ocorreu um erro ao processar a operação.');
