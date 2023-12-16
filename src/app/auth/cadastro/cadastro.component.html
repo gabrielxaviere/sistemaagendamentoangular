@@ -1,4 +1,4 @@
-<mat-card >
+<mat-card>
     <mat-card-header>
         <mat-card-title>Cadastro</mat-card-title>
     </mat-card-header>
@@ -32,8 +32,25 @@
                     obrigatório.</mat-error>
             </mat-form-field>
 
-            <button mat-raised-button color="primary" type="submit"
-                [disabled]="meuFormulario.invalid">Salvar</button>
+            <mat-form-field>
+                <mat-label>Tipo de usuário</mat-label>
+                <mat-select formControlName="tipo" (change)="updateValidators(meuFormulario.get('tipo').value)">
+                    <mat-option *ngFor="let opcao of tipoUsuario" [value]="opcao.id">
+                        {{ opcao.nome }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="meuFormulario.get('tipo').value == 2">
+                <mat-label>Administrador</mat-label>
+                <mat-select formControlName="responsavel">
+                    <mat-option *ngFor="let tipoUsuario of administradores" [value]="tipoUsuario.id">
+                        {{ tipoUsuario.nome }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="meuFormulario.invalid">Salvar</button>
         </form>
         <div class="signup-link">
             <p>Ja tem uma conta? <button mat-button color="accent" (click)="goToLogin()">Login</button></p>

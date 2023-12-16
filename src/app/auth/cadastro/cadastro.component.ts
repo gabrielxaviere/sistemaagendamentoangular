@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TipoUsuario } from 'src/app/core/models/enumtipousuario';
 import { Especialidades } from 'src/app/core/models/especialidades';
 import { User } from 'src/app/core/models/user';
 import { EspecialidadesService } from 'src/app/core/service/especialidades.service';
@@ -16,6 +17,8 @@ export class CadastroComponent implements OnInit {
 
   meuFormulario: FormGroup;
   item: User = new User(); 
+  tipoUsuario:any;
+  administradores: User[];
   
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -32,6 +35,14 @@ export class CadastroComponent implements OnInit {
 
     console.log(this.item)
     this.createForm();
+
+    this.tipoUsuario = [
+      { id: 0, nome: 'Administrador' },
+      { id: 2, nome: 'Paciente' }];
+
+      this.service.getAByTipo(TipoUsuario.ADMIN.value).subscribe(x=> {
+        this.administradores = x;
+      });
   }
 
   createForm() {
@@ -39,7 +50,9 @@ export class CadastroComponent implements OnInit {
       nome: [this.item.nome, [Validators.required]],
       sobrenome: [this.item.sobrenome, [Validators.required]],
       email: [this.item.email, [Validators.required, Validators.email]],
-      password: [this.item.senha, [Validators.required]]
+      password: [this.item.senha, [Validators.required]],
+      tipo: [this.item.tipo, [Validators.required]],
+      responsavel: [this.item.responsavel]
     });
   }
 
@@ -50,14 +63,15 @@ export class CadastroComponent implements OnInit {
     this.item.sobrenome = controls['sobrenome'].value;
     this.item.email = controls['email'].value;
     this.item.senha = controls['password'].value;
+    this.item.tipo = controls['tipo'].value
+    this.item.responsavel = controls['responsavel'].value;
 
     return this.item;
   }
   
   cadastrar() {
-    
     const editedItem = this.prepareItem();
-    editedItem.tipo = 0;
+    // editedItem.tipo = 0;
     this.service.create(editedItem).subscribe(res => {
       this.item = new User()
       this.messageService.openSuccessSnackBar('Operação realizada com sucesso.');
@@ -69,5 +83,13 @@ export class CadastroComponent implements OnInit {
 
   goToLogin() {
     this.router.navigate(['auth/login']);
+  }
+
+  updateValidators(tipo){
+    if(tipo == TipoUsuario.PACIENTE){
+      this.meuFormulario.get('responsavel').setValidators(Validators.required)
+    }else{
+      this.meuFormulario.get('responsavel').clearValidators();
+    }
   }
 }

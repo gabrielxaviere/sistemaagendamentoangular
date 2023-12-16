@@ -38,6 +38,13 @@ export class UsuariosService {
       }) as any);
   }
 
+  getAByTipo(tipo: number): Observable<User[]> {
+    return this.http.get<User[]>(API_URL + `/gettipo/${tipo}`)
+      .pipe(catchError((error, caught) => {
+        return of(error);
+      }) as any);
+  }
+
   getById(id: number): Observable<User> {
     return this.http.get<User>(API_URL + `/getforedit/${id}`)
       .pipe(catchError((error, caught) => {
