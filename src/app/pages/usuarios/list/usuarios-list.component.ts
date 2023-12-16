@@ -28,6 +28,7 @@ export class UsuariosListComponent implements AfterViewInit {
   displayedColumns: string[] = ['nome', 'sobrenome', 'especialidade', 'tipo', 'acoes'];
 
   filterName: string = "";
+  userID;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private fb: FormBuilder, public dialog: MatDialog, private service: UsuariosService, private messageService: MessageService) {
@@ -43,6 +44,7 @@ export class UsuariosListComponent implements AfterViewInit {
 
   getAll() {
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.userID = storedUser.id;
 
     this.service.getAll(this.filterName, storedUser.responsavel).subscribe(res => {
       this.listaUsuarios = new MatTableDataSource<User>(res);

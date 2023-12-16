@@ -57,7 +57,7 @@
             <a style="color: #002b5c;cursor: pointer;" (click)="openDialog(element.id)">
               <mat-icon>edit</mat-icon>
             </a>&nbsp;&nbsp;
-            <a style="color: rgb(255, 0, 0);cursor: pointer;" (click)="delete(element.id)">
+            <a *ngIf="element.id != userID" style="color: rgb(255, 0, 0);cursor: pointer;" (click)="delete(element.id)">
               <mat-icon>delete</mat-icon>
             </a>
           </td>
