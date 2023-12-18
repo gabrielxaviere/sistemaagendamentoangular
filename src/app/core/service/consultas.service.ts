@@ -79,8 +79,19 @@ export class ConsultasService {
       }) as any);
   }
 
-  getAllDisabledDate(responsavel: number): Observable<Consultas[]> {
-    return this.http.get<Consultas[]>(API_URL + "/getalldisableddate" + `/${responsavel}`)
+  getAllDisabledDate(responsavel: number, especialista: number): Observable<Consultas[]> {
+
+    let params = new HttpParams()
+
+    if (responsavel) {
+      params = params.set('responsavel', responsavel);
+    }
+
+    if (especialista) {
+      params = params.set('especialista', especialista);
+    }
+
+    return this.http.get<Consultas[]>(API_URL + "/getalldisableddate", { params: params })
       .pipe(catchError((error, caught) => {
         return of(error);
       }) as any);

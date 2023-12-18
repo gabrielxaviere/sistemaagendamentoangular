@@ -41,8 +41,7 @@ export class ConsultasEditComponent {
     this.especialidadesService.getAll().subscribe(res =>
       this.especialidades = res
     );
-
-    this.getAllDisabledDate();
+    
     this.item = this.data.item;
     if (this.item.id > 0) {
       this.service.getById(this.item.id).subscribe(res => {
@@ -59,16 +58,17 @@ export class ConsultasEditComponent {
 
   getAllDisabledDate(){
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
+    let id = this.meuFormulario.get('idProfissional').value;
     if(storedUser.responsavel > 0)
     {
-      this.service.getAllDisabledDate(storedUser.responsavel).subscribe(res=>{
+      this.service.getAllDisabledDate(storedUser.responsavel,id).subscribe(res=>{
         console.log(res)
         this.disabledDates = res.map(consulta => consulta.data);
       });
     }    
   }
 
-  getEspecialistas(){
+  getEspecialistas(){    
     this.usuariosService.getAllProfissional(this.meuFormulario.get('especialidadeProfissional').value).subscribe(res =>
       this.profissionais = res
     );

@@ -16,7 +16,7 @@
                 </mat-form-field>
                 <mat-form-field *ngIf="meuFormulario.get('especialidadeProfissional').value > 0">
                     <mat-label>Profissional</mat-label>
-                    <mat-select formControlName="idProfissional">
+                    <mat-select formControlName="idProfissional" (selectionChange)="getAllDisabledDate()">
                         <mat-option *ngFor="let opcao of profissionais" [value]="opcao.id">
                             {{ opcao.nome }}
                         </mat-option>
