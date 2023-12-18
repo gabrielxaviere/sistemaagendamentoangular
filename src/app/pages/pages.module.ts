@@ -10,6 +10,7 @@ import { UsuariosEditComponent } from './usuarios/edit/usuarios-edit.component';
 import { ComponentsModule } from '../shared/components/components.module';
 import { DatetimeComponent } from '../shared/components/datetime/datetime.component';
 import { PaginaInicialComponent } from './paginainicial/paginainicial.component';
+import { LoadingComponent } from '../shared/components/loading/loading.component';
 
 @NgModule({
   declarations: [

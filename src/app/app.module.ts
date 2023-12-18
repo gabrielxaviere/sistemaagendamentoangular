@@ -24,6 +24,7 @@ import { AuthLayoutComponent } from './layout/app-layout/auth-layout/auth-layout
 import { PagesModule } from './pages/pages.module';
 import { ComponentsModule } from './shared/components/components.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoadingComponent } from './shared/components/loading/loading.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -36,7 +37,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppComponent,
     MainLayoutComponent,
     AuthLayoutComponent,
-    SidebarComponent   
+    SidebarComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

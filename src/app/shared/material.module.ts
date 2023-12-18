@@ -21,9 +21,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { NgbTimepicker } from "@ng-bootstrap/ng-bootstrap";
-
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const materialModules = [
   MatExpansionModule,
@@ -48,6 +46,7 @@ const materialModules = [
   MatDialogModule,
   MatGridListModule,
   MatSnackBarModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({
