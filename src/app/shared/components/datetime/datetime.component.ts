@@ -49,36 +49,37 @@ export class DatetimeComponent {
   }
 
   isDateTimeDisabled(date: Date, hour: number, minute: number): boolean {
-    if (Array.isArray(this.disabledDates)) {
-      return this.disabledDates.some(disabledDate => {
-        try {
-          if (disabledDate == null) {
-            return false; // Pula para a próxima iteração se a data for nula ou indefinida
-          }
-  
-          // Verifica se disabledDate é uma instância válida de Date
-          const parsedDate = new Date(disabledDate);
-  
-          if (!(parsedDate instanceof Date) || isNaN(parsedDate.getTime())) {
-            return false; // Pula para a próxima iteração se a data não for válida
-          }
-  
-          // Ajusta a hora e os minutos conforme necessário
-          parsedDate.setHours(hour);
-          parsedDate.setMinutes(minute);
-  
-          // Compara as datas
-          return parsedDate.getTime() === date.getTime();
-        } catch (error) {
-          console.error(`Erro ao processar data desabilitada: ${error}`);
-          return false; // Pula para a próxima iteração se ocorrer um erro
-        }
-      });
+    if (!Array.isArray(this.disabledDates)) {
+      return false; // Permite o campo se nenhuma data corresponder
     }
   
-    return false; // Permite o campo se nenhuma data corresponder
+    const isNullOrInvalidDate = (d: Date) => d == null || !(d instanceof Date) || isNaN(d.getTime());
+  
+    return this.disabledDates.some(disabledDate => {
+      try {  
+      
+        const combinedDateTime = new Date(date);
+        combinedDateTime.setHours(hour);
+        combinedDateTime.setMinutes(minute);
+
+        const parsedDate = new Date(disabledDate);
+  
+        var a = parsedDate.getTime() === combinedDateTime.getTime();
+
+        if(a == true)
+        {
+          console.log("Data correta"+parsedDate)
+          console.log("Data correta"+combinedDateTime)
+          return true; 
+        }else{
+          return false;
+        }
+        
+      } catch (error) {
+        // Emitir um evento ou lançar uma exceção para lidar com o erro
+        console.error(`Erro ao processar data desabilitada: ${error}`);
+        return false;
+      }
+    });
   }
-  
-  
-  
 }

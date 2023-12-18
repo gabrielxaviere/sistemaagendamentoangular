@@ -2,7 +2,7 @@
 
 <form [formGroup]="datetimeForm" (change)="onDateTimeSelected()">
   <mat-form-field>
-    <input matInput
+    <input matInput         
            placeholder="Escolha a data"
            [matDatepicker]="picker"
            formControlName="date">
@@ -21,7 +21,7 @@
     <mat-label>Minuto:</mat-label>
     <mat-select formControlName="minute">
       <mat-option *ngFor="let minute of minutes" [value]="minute"
-      [attr.disabled]="isDateTimeDisabled(datetimeForm.get('date').value, datetimeForm.get('hour').value, minute) ? 'true' : null"
+      [disabled]="isDateTimeDisabled(datetimeForm.get('date').value, datetimeForm.get('hour').value, minute) ? 'true' : null"
       >{{ minute }}</mat-option>
     </mat-select>
   </mat-form-field>
