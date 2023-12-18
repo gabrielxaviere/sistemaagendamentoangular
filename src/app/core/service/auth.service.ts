@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
+import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
 const API_URL = environment.apiUrl + '/api/Login';
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient,private messageService: MessageService) {
+  constructor(private http: HttpClient, private loading: LoadingComponent,private messageService: MessageService) {
     const currentUserString = localStorage.getItem('currentUser');
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(currentUserString || '{}')
@@ -34,6 +35,7 @@ export class AuthService {
       email: email,
       password: password,
     }
+    this.loading.init();
     return this.http
       .get<any>(API_URL + '?' + this.urlParam(params))
       .pipe(
@@ -42,12 +44,16 @@ export class AuthService {
           {
             localStorage.setItem('currentUser', JSON.stringify(res));
             this.currentUserSubject.next(res);
+            this.loading.stop();
             return res;
+            
           }   
           else{
             this.logout();
+            this.loading.stop();
             this.messageService.openErrorSnackBar("Usuário ou senha inválidas");
           }       
+          this.loading.stop();
         })
       );
   }
@@ -59,9 +65,11 @@ export class AuthService {
   }
 
   logout() {
+    this.loading.init();
     const emptyUser = new User();
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(emptyUser);
+    this.loading.stop();
     return of({ success: false });
   }
 }

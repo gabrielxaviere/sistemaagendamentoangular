@@ -1,6 +1,9 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-loading',
   templateUrl: './loading.component.html',
