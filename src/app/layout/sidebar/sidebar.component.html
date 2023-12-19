@@ -17,9 +17,9 @@
             <span routerLink="/apps/usuarios">Usuários</span>
         </button>
         <mat-divider></mat-divider>
-        <button mat-button class="menu-button">
+        <button (click)="sair()" mat-button class="menu-button">
             <mat-icon>exit_to_app</mat-icon>
-            <span (click)="sair()">Sair</span>
+            <span>Sair</span>
         </button>        
     </mat-sidenav>
     <mat-sidenav-content style="background-color: #f1f2f7;">
