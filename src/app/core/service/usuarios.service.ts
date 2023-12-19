@@ -22,9 +22,9 @@ export class UsuariosService {
     }
 
     if (responsavel !== null && responsavel !== undefined) {
-      params = params.set('responsavel', responsavel.toString());
+      params = params.set('responsavel', responsavel);
     }
-
+    
     return this.http.get<User[]>(API_URL,{ params: params })
       .pipe(catchError((error, caught) => {
         return of(error);

@@ -45,8 +45,16 @@ export class UsuariosListComponent implements AfterViewInit {
   getAll() {
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
     this.userID = storedUser.id;
+    let responsavel = 0;
 
-    this.service.getAll(this.filterName, storedUser.responsavel).subscribe(res => {
+    if(storedUser.responsavel == null)
+    {
+      responsavel = storedUser.id;
+    }else{
+      responsavel = storedUser.responsavel;
+    }
+
+    this.service.getAll(this.filterName, responsavel).subscribe(res => {
       this.listaUsuarios = new MatTableDataSource<User>(res);
       this.listaUsuarios.paginator = this.paginator;
     }, err => {
