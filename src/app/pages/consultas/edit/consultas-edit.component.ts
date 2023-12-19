@@ -74,7 +74,18 @@ export class ConsultasEditComponent {
   }
 
   getEspecialistas(){    
-    this.usuariosService.getAllProfissional(this.meuFormulario.get('especialidadeProfissional').value).subscribe(res =>
+    const storedUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    let responsavel = 0;
+
+    if(storedUser.responsavel == null)
+    {
+      responsavel = storedUser.id;
+    }else{
+      responsavel = storedUser.responsavel;
+    }
+
+    this.usuariosService.getAllProfissional(this.meuFormulario.get('especialidadeProfissional').value,responsavel).subscribe(res =>
       this.profissionais = res
     );
   }
