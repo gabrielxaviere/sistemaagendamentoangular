@@ -38,9 +38,9 @@ export class UsuariosEditComponent {
       this.especialidades = res
     );
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
-     
+
     this.tipoUsuarioLogado = storedUser.tipo;
-    
+
     if (this.tipoUsuarioLogado == TipoUsuario.ATENDENTE.value) {
       this.tipoUsuario = [
         { id: 1, nome: 'Profissional da Saúde' },
@@ -107,10 +107,9 @@ export class UsuariosEditComponent {
   create(item) {
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
 
-    if(storedUser.tipo == TipoUsuario.ADMIN.value)
-    {
+    if (storedUser.tipo == TipoUsuario.ADMIN.value) {
       item.responsavel = storedUser.id;
-    }else{
+    } else {
       item.responsavel = storedUser.responsavel;
     }
 
@@ -135,13 +134,15 @@ export class UsuariosEditComponent {
     this.dialogRef.close();
   }
 
-  updateValidators(tipo){
+  updateValidators(tipo) {
     console.log(tipo);
-    if(tipo == TipoUsuario.PROFISSIONAL_SAUDE.value){
+    if (tipo == TipoUsuario.PROFISSIONAL_SAUDE.value) {
       this.meuFormulario.get('idEspecialidade').setValidators(Validators.required)
-    }else{
+      this.meuFormulario.get('idEspecialidade').updateValueAndValidity();
+    } else {
       this.meuFormulario.get('idEspecialidade').reset();
-      this.meuFormulario.get('idEspecialidade').clearValidators();  
+      this.meuFormulario.get('idEspecialidade').setValidators([]);
+      this.meuFormulario.get('idEspecialidade').updateValueAndValidity();
     }
   }
 }

@@ -87,10 +87,13 @@ export class CadastroComponent implements OnInit {
 
   updateValidators(tipo){
     if(tipo == TipoUsuario.PACIENTE.value){
-      this.meuFormulario.get('responsavel').setValidators(Validators.required)
+      this.meuFormulario.get('responsavel').setValidators([Validators.required]);
+      this.meuFormulario.get('responsavel').updateValueAndValidity();
     }else{
       this.meuFormulario.get('responsavel').reset();
-      this.meuFormulario.get('responsavel').clearValidators();
+      this.meuFormulario.get('responsavel').setValidators([]);
+      this.meuFormulario.get('responsavel').updateValueAndValidity();
+      // 
     }
   }
 }
