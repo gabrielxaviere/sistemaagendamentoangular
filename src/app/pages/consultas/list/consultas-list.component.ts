@@ -55,7 +55,7 @@ export class ConsultasListComponent implements AfterViewInit {
     let idUsuario = null;
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
 
-    if (storedUser.tipo == TipoUsuario.PACIENTE) {
+    if (storedUser.tipo == TipoUsuario.PACIENTE.value || storedUser.tipo == TipoUsuario.PROFISSIONAL_SAUDE.value) {
       idUsuario = storedUser.id;
     }
 
