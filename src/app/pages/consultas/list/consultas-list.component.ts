@@ -13,6 +13,10 @@ import { Consultas } from 'src/app/core/models/consulta';
 import { CancelConfirmationComponent } from 'src/app/shared/components/cancel/cancel-confirmation.component';
 import { TipoUsuario } from 'src/app/core/models/enumtipousuario';
 import { ConsultaList } from 'src/app/core/list/ConsultaList';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @Component({
   selector: 'app-consultas',

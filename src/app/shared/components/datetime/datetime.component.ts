@@ -52,7 +52,6 @@ export class DatetimeComponent {
   }
 
   onDateTimeSelected(): void {
-    console.log("adasdasd");
     const selectedDate = this.datetimeForm.get('date').value;
     const selectedHour = this.datetimeForm.get('hour').value;
     const selectedMinute = this.datetimeForm.get('minute').value;
