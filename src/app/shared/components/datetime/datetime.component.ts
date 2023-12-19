@@ -33,6 +33,10 @@ export class DatetimeComponent {
     console.log(this.minDate)
   }
 
+  clearMinute(){
+    this.datetimeForm.get('minute').reset();
+  }
+
   dateFilter = (date: Date | null): boolean => {
     const day = date.getDay();
 

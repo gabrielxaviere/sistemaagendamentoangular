@@ -11,6 +11,7 @@ import { ConsultasService } from 'src/app/core/service/consultas.service';
 import { EspecialidadesService } from 'src/app/core/service/especialidades.service';
 import { MessageService } from 'src/app/core/service/message.service';
 import { UsuariosService } from 'src/app/core/service/usuarios.service';
+import { DatetimeComponent } from 'src/app/shared/components/datetime/datetime.component';
 @Component({
   selector: 'app-consultas',
   templateUrl: './consultas-edit.component.html',
@@ -25,6 +26,8 @@ export class ConsultasEditComponent {
   especialidades: Especialidades[];
   profissionais: User[];
   disabledDates: Date[]
+
+  @ViewChild('datetime') dataComponent: DatetimeComponent;
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<ConsultasEditComponent>,
@@ -57,6 +60,8 @@ export class ConsultasEditComponent {
   }
 
   getAllDisabledDate(){
+    this.dataComponent.clearMinute();
+    this.item.data = null;
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
     let id = this.meuFormulario.get('idProfissional').value;
     if(storedUser.responsavel > 0)
@@ -77,7 +82,7 @@ export class ConsultasEditComponent {
   createForm() {
     this.meuFormulario = this.fb.group({
       especialidadeProfissional: ['', Validators.required],
-      idProfissional: [this.item.idProfissional, [Validators.required]],
+      idProfissional: ['', [Validators.required]],
     });
   }
 

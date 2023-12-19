@@ -22,9 +22,10 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <app-datetime [disabledDates]="disabledDates" (datetimeSelected)="onDatetimeSelected($event)"></app-datetime>
+                <app-datetime #datetime [disabledDates]="disabledDates" (datetimeSelected)="onDatetimeSelected($event)"></app-datetime>
+                <mat-error *ngIf="item.data == null">Selecione a data</mat-error>
                 <br />
-                <button mat-raised-button color="primary" type="submit"
+                <button mat-raised-button color="primary" type="submit" [disabled]="item.data == null || meuFormulario.invalid"
                     >Salvar</button>
             </form>
         </div>
