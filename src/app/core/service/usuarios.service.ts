@@ -31,8 +31,19 @@ export class UsuariosService {
       }) as any);
   }
 
-  getAllProfissional(especialidade: number): Observable<User[]> {
-    return this.http.get<User[]>(API_URL + `/getprofissional/${especialidade}`)
+  getAllProfissional(especialidade: number, responsavel: number): Observable<User[]> {
+    let params = new HttpParams();
+    
+
+    if (especialidade !== null && especialidade !== undefined) {
+      params = params.set('especialidade', especialidade);
+    }
+
+    if (responsavel !== null && responsavel !== undefined) {
+      params = params.set('responsavel', responsavel);
+    }
+
+    return this.http.get<User[]>(API_URL + `/getprofissional`, {params: params})
       .pipe(catchError((error, caught) => {
         return of(error);
       }) as any);
