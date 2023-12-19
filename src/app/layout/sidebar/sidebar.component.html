@@ -8,13 +8,13 @@
 
 <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">   
-        <button *ngIf="viewConsultas" mat-button class="menu-button" >
+        <button routerLink="/apps/consultas" *ngIf="viewConsultas" mat-button class="menu-button" >
             <mat-icon>receipt</mat-icon>
-            <span routerLink="/apps/consultas">Consultas</span>
+            <span >Consultas</span>
         </button>
-        <button *ngIf="viewUsuarios" mat-button class="menu-button" >
+        <button routerLink="/apps/usuarios" *ngIf="viewUsuarios" mat-button class="menu-button" >
             <mat-icon>person</mat-icon>
-            <span routerLink="/apps/usuarios">Usuários</span>
+            <span>Usuários</span>
         </button>
         <mat-divider></mat-divider>
         <button (click)="sair()" mat-button class="menu-button">
